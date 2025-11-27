@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Promo Screen</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: linear-gradient(145deg, #111827, #0f766e);
+      color: #f9fafb;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px 16px 28px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 24px;
+      padding: 24px 20px 20px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      backdrop-filter: blur(18px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.08);
+      color: #bbf7d0;
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      margin-bottom: 16px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .title {
+      font-size: 26px;
+      line-height: 1.2;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #e5e7eb;
+      opacity: 0.85;
+      margin-bottom: 18px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .feature {
+      padding: 10px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .feature span {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .cta-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .btn-primary {
+      flex: 1;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #22c55e, #a3e635);
+      color: #052e16;
+      box-shadow: 0 10px 24px rgba(34, 197, 94, 0.4);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
+      opacity: 0.9;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+
+    .progress-dots {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-top: 14px;
+    }
+
+    .progress-dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.6);
+    }
+
+    .progress-dots span.active {
+      width: 18px;
+      background: #22c55e;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%) translateY(120%);
+      background: #111827;
+      color: #e5e7eb;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      opacity: 0;
+      transition: transform 0.18s ease-out, opacity 0.18s ease-out;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0%);
+      opacity: 1;
+    }
+
+    .toast-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid #22c55e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #22c55e;
+    }
+
+    /* Небольшие правки под совсем маленькие экраны */
+    @media (max-width: 360px) {
+      .card {
+        padding: 18px 14px 16px;
+        border-radius: 18px;
+      }
+
+      .title {
+        font-size: 22px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <div class="badge">
+        <div class="dot"></div>
+        Новое · Личный помощник
+      </div>
+
+      <h1 class="title">Умный помощник в&nbsp;вашем кармане</h1>
+      <p class="subtitle">
+        Планируй день, следи за задачами и получай подсказки в реальном времени.
+        Всё — в одном мобильном экране.
+      </p>
+
+      <div class="features">
+        <div class="feature">
+          <span>⏱</span>
+          Напоминания и привычки без сложных настроек.
+        </div>
+        <div class="feature">
+          <span>✨</span>
+          Персональные советы на основе твоих целей.
+        </div>
+      </div>
+
+      <div class="cta-block">
+        <button class="btn-primary" id="startBtn">Начать сейчас</button>
+        <div class="hint">Без регистрации</div>
+      </div>
+
+      <div class="progress-dots">
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">
+    <div class="toast-icon">✓</div>
+    <span>Демо-кнопка сработала 🎉</span>
+  </div>
+
+  <script>
+    const btn = document.getElementById("startBtn");
+    const toast = document.getElementById("toast");
+    let toastTimeout;
+
+    btn.addEventListener("click", () => {
+      // имитация действия (например, переход к следующему экрану)
+      showToast();
+
+      // короткая вибрация для мобильных (если поддерживается)
+      if (window.navigator.vibrate) {
+        window.navigator.vibrate(30);
+      }
+    });
+
+    function showToast() {
+      clearTimeout(toastTimeout);
+      toast.classList.add("show");
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
